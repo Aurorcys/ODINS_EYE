@@ -11,9 +11,10 @@ from alpaca.trading.enums import OrderSide, TimeInForce
 import os
 from datetime import datetime, timedelta, time
 from typing import Tuple, Optional
+load_dotenv("GODSEYE.env") 
 
-API_KEY = 'PKQU2YWIR63CWRUNV7WFTLMSJT'
-SECRET_KEY = 'AgEn1o6Xqh7ZdUwjqpHbUacuRPvMWa5H1PRqa21EQJRy'
+API_KEY = os.getenv("APCA_API_KEY_ID")
+SECRET_KEY = os.getenv("APCA_API_SECRET_KEY")
 
 class AlpacaRealData:
     """
