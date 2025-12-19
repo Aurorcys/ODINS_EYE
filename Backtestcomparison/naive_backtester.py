@@ -2,6 +2,7 @@ import pandas as pd
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 class NaiveBacktester:
     def __init__(self, initial_capital=10000):
@@ -35,6 +36,7 @@ class NaiveBacktester:
         """
         Naive trade execution logic
         """
+        
         if signal == 1 and self.capital > 0:
             shares_to_buy = self.capital / price
             cost = shares_to_buy * price
@@ -43,7 +45,7 @@ class NaiveBacktester:
             self.trades += 1
 
             self.trade_log.append({
-                'timestamp': timestamp,
+                'timestamp': timestamp if isinstance(timestamp, (pd.Timestamp, datetime)) else pd.Timestamp.now(),  # FIX
                 'action': 'BUY',
                 'price': price,
                 'shares': shares_to_buy,
@@ -59,7 +61,7 @@ class NaiveBacktester:
             self.trades += 1
 
             self.trade_log.append({
-                'timestamp': timestamp,
+                'timestamp': timestamp if isinstance(timestamp, (pd.Timestamp, datetime)) else pd.Timestamp.now(),
                 'action': 'SELL',
                 'price': price,
                 'shares': shares_sold,
